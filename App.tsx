@@ -7,6 +7,7 @@ import HomeScreen from './src/HomeScreen';
 import Transitions from './src/Transitions/Transitions';
 import TransitionsOverlay from './src/Transitions/TransitionsOverlay';
 import Timings from './src/Timing/Timings';
+import PanGesture from './src/PanGesture/PanGesture';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,7 @@ export default function App() {
         <Stack.Screen name="Transitions" component={Transitions} />
         <Stack.Screen name="TransitionsOverlay" component={TransitionsOverlay} />
         <Stack.Screen name="Timings" component={Timings} />
+        <Stack.Screen name="Pan" component={PanGesture} />
       </Stack.Navigator>
     </NavigationContainer>
   );
