@@ -9,6 +9,10 @@ const HomeScreen = ({navigation}) => {
             title="Clock Values and Identities"
             onPress={() => navigation.navigate('Clock')}
             />
+            <Button
+            title="Transitions"
+            onPress={() => navigation.navigate('Transitions')}
+            />
       </View>
     )
 }

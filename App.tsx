@@ -2,8 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import ClockValuesAndIdentities from './src/ClockValuesAndIdentities'
+import ClockValuesAndIdentities from './src/ClockValue/ClockValuesAndIdentities'
 import HomeScreen from './src/HomeScreen'
+import Transitions from './src/Transitions/Transitions'
 
 const Stack = createStackNavigator();
 
@@ -13,6 +14,7 @@ export default function App() {
       <Stack.Navigator initialRouteName='HomeScreen'>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Clock" component={ClockValuesAndIdentities} />
+        <Stack.Screen name="Transitions" component={Transitions} />
       </Stack.Navigator>
     </NavigationContainer>
   );

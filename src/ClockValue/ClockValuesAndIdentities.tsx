@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from "react-native";
 import Animated from "react-native-reanimated";
 
 import { useMemoOne } from 'use-memo-one';
-import { Button, Card, cards } from "./components";
+import { Button, Card, cards } from "../components";
 
 const {
     useCode,
