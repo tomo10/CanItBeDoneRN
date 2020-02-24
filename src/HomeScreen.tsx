@@ -17,6 +17,10 @@ const HomeScreen = ({navigation}) => {
             title="Transitions Overlay"
             onPress={() => navigation.navigate('TransitionsOverlay')}
             />
+            <Button
+            title="Timings"
+            onPress={() => navigation.navigate('Timings')}
+            />
       </View>
     )
 }

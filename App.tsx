@@ -6,6 +6,7 @@ import ClockValuesAndIdentities from './src/ClockValue/ClockValuesAndIdentities'
 import HomeScreen from './src/HomeScreen';
 import Transitions from './src/Transitions/Transitions';
 import TransitionsOverlay from './src/Transitions/TransitionsOverlay';
+import Timings from './src/Timing/Timings';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ export default function App() {
         <Stack.Screen name="Clock" component={ClockValuesAndIdentities} />
         <Stack.Screen name="Transitions" component={Transitions} />
         <Stack.Screen name="TransitionsOverlay" component={TransitionsOverlay} />
+        <Stack.Screen name="Timings" component={Timings} />
       </Stack.Navigator>
     </NavigationContainer>
   );
