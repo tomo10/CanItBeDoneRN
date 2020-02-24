@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import Animated, { Easing } from "react-native-reanimated";
 import {
-  bInterpolate,
-  transformOrigin,
-  useTransition
+  useTransition,
+  transformOrigin
 } from "react-native-redash";
 
 import { Button, Card, StyleGuide, cards } from "../components";
@@ -33,22 +32,35 @@ const styles = StyleSheet.create({
   }
 });
 
-export default () => {
+// want this bottom left of card rather than center. 
+const newOrigin = -(width / 2 - StyleGuide.spacing * 2);
 
-  // in Animation dont really use true false for state. Its on a spectrum of 0 to 1. Anything not zero is effectively true  
+export default () => {
+    
+  // in Animation dont really use true false for state. Its on a spectrum of 0 to 1. Anything not zero is effectively true. Default is 0  
   const [toggled, setToggled] = useState<0 | 1>(0);
+  // useTransition function. First args is value want to change. Typically moving from 0 to 1.
+  const transition = useTransition(toggled, not(toggled), toggled);
 
   return (
     <View style={styles.container}>
       {cards.map((card, index) => {
-          const rotate = toggled ? Math.PI / 6 : 0;
+          let direction = 0;
+          if (index === 0) direction = -1;
+          else if (index === 2) direction = 1;
+          
+          const rotate = multiply(direction, interpolate(transition, {
+            inputRange: [0, 1],
+            outputRange: [0, Math.PI / 6]
+          }))
         return (
           <Animated.View 
             key={card.id} 
             style={[
                 styles.overlay,
                 {
-                    transform: [{ rotate: `${rotate}rad`}]
+                  transform: transformOrigin({ x: newOrigin, y: 0 }, 
+                  { rotate })
                 }
             ]}>
             <Card {...{ card }} />
