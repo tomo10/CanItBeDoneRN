@@ -13,6 +13,10 @@ const HomeScreen = ({navigation}) => {
             title="Transitions"
             onPress={() => navigation.navigate('Transitions')}
             />
+            <Button
+            title="Transitions Overlay"
+            onPress={() => navigation.navigate('TransitionsOverlay')}
+            />
       </View>
     )
 }
