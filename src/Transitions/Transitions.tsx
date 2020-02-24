@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import {
   Dimensions,
   ImageStyle,
@@ -9,7 +9,7 @@ import {
 
 import { FlexibleCard as Card, StyleGuide, cards } from "../components";
 import { Selection } from '../components'
-import { set } from "react-native-reanimated";
+import { set, Transitioning, Transition, TransitioningView } from "react-native-reanimated";
 
 interface Layout {
   id: string;
@@ -66,22 +66,35 @@ const wrap: Layout = {
 };
 
 const layouts = [column, row, wrap];
+const transition = (
+    <Transition.Change durationMs={500} interpolation="easeInOut"  />
+    );
 
 const Transitions = () => {
-
+    const ref = useRef<TransitioningView>(null);
     const [currentLayout, setCurrentLayout] = useState(layouts[0].layout)
 
   return (
       <>
-        <View style={[styles.container, currentLayout.container]}>
+        <Transitioning.View style={[styles.container, currentLayout.container]} {...{ref, transition}} >
             {cards.map(card => (
             <Card key={card.id} style={currentLayout.child} {...{ card }} />
             ))}
-        </View>
+        </Transitioning.View>
         {
             layouts.map(layout => (
-                <Selection key={layout.id} name={layout.name} isSelected={layout.layout === currentLayout} onPress={() => setCurrentLayout(layout.layout)} />
-                ))
+                <Selection 
+                    key={layout.id} 
+                    name={layout.name} 
+                    isSelected={layout.layout === currentLayout} 
+                    onPress={() =>  {
+                        if (ref.current) {
+                            ref.current.animateNextTransition();
+                        }
+                        setCurrentLayout(layout.layout)} 
+                    }
+                />
+            ))
         }
       </>
   );
