@@ -1,16 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, ScrollView } from 'react-native';
 import Header from './Header'
 import StyleGuide from './components/StyleGuide';
 import Animated from "react-native-reanimated";
 
-const dataArr = [
+const dataArr: Array<object> = [
         {title: "Clock Values and Identities", navigate: 'Clock'},
         {title: "Transitions", navigate: 'Transitions'},
         {title: "Transitions Overlay", navigate: 'TransitionsOverlay'},
         {title: "Timings", navigate: 'Timings'},
         {title: "Pan Gesture", navigate: 'Pan'},
-        {title: "Next lad", navigate: 'Next'}
+        {title: "Decay", navigate: 'Decay'}
     ]
 
 type ListProps = {
@@ -21,6 +21,7 @@ type ListProps = {
 const List = ({array, navigation}: ListProps) => {
     
     return array.map(button => {
+    
          return (
              <TouchableOpacity style={StyleGuide.typography.row}>
                 <View>
@@ -40,12 +41,15 @@ const HomeScreen = ({navigation}) => {
     return (
         <>
         <Header/>
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Animated.ScrollView
+            scrollEventThrottle={16}
+            contentContainerStyle={ { paddingTop: 50 } }
+        >
             <List 
                 array={dataArr} 
                 navigation={navigation}
                 />
-        </View>
+        </Animated.ScrollView>
       </>
     )
 }
