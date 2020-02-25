@@ -4,7 +4,9 @@ import Header from './Header'
 import StyleGuide from './components/StyleGuide';
 import Animated from "react-native-reanimated";
 
-const dataArr: Array<object> = [
+import List, { List as ListModel } from "./List";
+
+const list: ListModel = [
         {title: "Clock Values and Identities", navigate: 'Clock'},
         {title: "Transitions", navigate: 'Transitions'},
         {title: "Transitions Overlay", navigate: 'TransitionsOverlay'},
@@ -13,30 +15,9 @@ const dataArr: Array<object> = [
         {title: "Decay", navigate: 'Decay'}
     ]
 
-type ListProps = {
-    array: Array<Object>,
-    navigation: Object
-}
 
-const List = ({array, navigation}: ListProps) => {
-    
-    return array.map(button => {
-    
-         return (
-             <TouchableOpacity style={StyleGuide.typography.row}>
-                <View>
-                    <Button
-                        title={button.title}
-                        onPress={() => navigation.navigate(button.navigate)}
-                    />        
-                </View>
-             </TouchableOpacity>
-         )
-    })
-}
 
-const HomeScreen = ({navigation}) => {
-
+const HomeScreen = ({ navigation }) => {
 
     return (
         <>
@@ -45,10 +26,7 @@ const HomeScreen = ({navigation}) => {
             scrollEventThrottle={16}
             contentContainerStyle={ { paddingTop: 50 } }
         >
-            <List 
-                array={dataArr} 
-                navigation={navigation}
-                />
+            <List {...{ list, navigation }} />
         </Animated.ScrollView>
       </>
     )
