@@ -3,10 +3,11 @@ import { StyleSheet, Text, View, Button, TouchableOpacity, ScrollView } from 're
 import Item, { LIST_ITEM_HEIGHT } from "./ListItem";
 import Animated from "react-native-reanimated";
 import Chevron from "./Chevron";
-import { bInterpolate, useTransition } from "react-native-redash";
+import { bInterpolate, withTransition, onGestureEvent } from "react-native-redash";
+import { TapGestureHandler, State } from 'react-native-gesture-handler';
 
 
-const { interpolate } = Animated;
+const { interpolate, Value, cond, eq, not, set, useCode } = Animated;
 
 const styles = StyleSheet.create({
     container: {
@@ -35,9 +36,11 @@ type ListProps = {
 }
 
 export default ({ list, navigation }: ListProps) => {
-    
-    const [open, setOpen] = useState(false);
-    const transition = useTransition(open);
+    console.log('we mount')
+    const open = new Value<0 | 1>(0);
+    const transition = withTransition(open);
+    const state = new Value(State.UNDETERMINED);
+    const gestureHandler = onGestureEvent({ state });
     const height = bInterpolate(
         transition,
         0,
@@ -47,9 +50,15 @@ export default ({ list, navigation }: ListProps) => {
         inputRange: [0, 16 / 400],
         outputRange: [8, 0]
     });
+
+    // if state equals end, set open to not open. ie reset state
+    useCode(() => cond(eq(state, State.END), set(open, not(open))), [
+        open,
+        state
+    ])
     return (
             <>
-             <TouchableOpacity onPress={() => setOpen(prev => !prev)}>
+             <TapGestureHandler {...gestureHandler}>
                 <Animated.View
                 style={[
                     styles.container,
@@ -59,10 +68,10 @@ export default ({ list, navigation }: ListProps) => {
                     }
                 ]}
                 >
-                <Text style={styles.title}>List of animations</Text>
-                <Chevron {...{ transition }} />
+                    <Text style={styles.title}>List of animations</Text>
+                    <Chevron {...{ transition }} />
                 </Animated.View>
-             </TouchableOpacity>
+             </TapGestureHandler>
              <Animated.View style={[styles.items, { height }]}>
                 {list.map((item, key) => (
                     <Item {...{ item, key, navigation }} isLast={key === list.length - 1} />
