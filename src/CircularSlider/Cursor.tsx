@@ -2,9 +2,10 @@ import * as React from 'react';
 import Animated from 'react-native-reanimated';
 import { View, StyleSheet } from 'react-native';
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
-import { canvas2Polar, polar2Canvas } from 'react-native-redash';
+import { withOffset } from 'react-native-redash';
+import { canvas2Polar, polar2Canvas } from "./Coordinates";
 
-const { event, Value } = Animated;
+const { event, Value, useCode, set, block } = Animated;
 
 interface CursorProps {
     theta: Animated.Value<number>;
@@ -24,9 +25,18 @@ export default ({theta, r, size}: CursorProps) => {
         }
     }]);
 
+    const center = {x: r, y: r};
+    const x = withOffset({ value: translationX, state });
+    const y = withOffset({ value: translationY, state });
+    const alpha = canvas2Polar({x, y}, center).theta;
     const polar = canvas2Polar({ x: translationX, y: translationY}, {x: r, y: r});
-    const {x: translateX, y: translateY} = polar2Canvas({ theta: polar.theta, radius: r}, {x: r, y: r});
-
+    const {x: translateX, y: translateY} = polar2Canvas(
+        { theta: polar.theta, radius: r}, 
+        center
+    );
+    // useCode(() => set(theta, alpha), [alpha, theta]);
+    
+    
     return (
         <PanGestureHandler onHandlerStateChange={onGestureEvent} {...{onGestureEvent}}>
             <Animated.View 
@@ -36,7 +46,7 @@ export default ({theta, r, size}: CursorProps) => {
                 height: size, 
                 borderRadius: size / 2, 
                 backgroundColor: "red",
-                transform: [{translateX}, {translateY}]
+                transform: [{ translateX }, { translateY }]
                 }} />
         </PanGestureHandler>
     )

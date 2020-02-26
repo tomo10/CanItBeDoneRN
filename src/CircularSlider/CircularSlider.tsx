@@ -31,16 +31,18 @@ export default () => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <CircularProgress
-          bg={StyleGuide.palette.background}
-          fg={StyleGuide.palette.primary}
-          strokeWidth={STROKE_WIDTH}
-          theta={PI}
-          {...{ r }}
-        />
+        <View>
+          <CircularProgress
+            bg={StyleGuide.palette.background}
+            fg={StyleGuide.palette.primary}
+            strokeWidth={STROKE_WIDTH}
+            theta={PI}
+            {...{ r }}
+          />
+        </View>
+        <Cursor theta={start} size={STROKE_WIDTH} r={r - STROKE_WIDTH / 2}  />
+        <Cursor theta={end} size={STROKE_WIDTH} r={r - STROKE_WIDTH / 2} />
       </View>
-      <Cursor theta={start} size={STROKE_WIDTH} r={r - STROKE_WIDTH / 2} />
-      <Cursor theta={start} size={STROKE_WIDTH} r={r - STROKE_WIDTH / 2} />
     </View>
   );
 };
