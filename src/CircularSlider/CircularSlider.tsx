@@ -3,6 +3,7 @@ import { Dimensions, StyleSheet, View, PixelRatio } from "react-native";
 import Animated from 'react-native-reanimated';
 import { StyleGuide } from "../components";
 import CircularProgress from "./CircularProgress";
+import CircularProgressSVG from "./CircularProgressSVG";
 import Cursor from './Cursor'
 
 const {Value, sub, cond, lessThan, add} = Animated
@@ -16,7 +17,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "white"
   },
   content: {
     width: r * 2,
@@ -30,16 +32,17 @@ export default () => {
   const theta = sub(
     cond(lessThan(start, end), end, add(2 * PI, end)), 
     start); // if start < end. subtract start from end. If not add 2PI to end value
-  const rotate = sub(PI, end);
+  const rotate = sub(2 * PI, start);
+  // const rotate = sub(PI, end);
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <Animated.View style={{...StyleSheet.absoluteFillObject, transform: [{ rotate }]}}>
-          <CircularProgress
+          <CircularProgressSVG
             bg={StyleGuide.palette.background}
             fg={StyleGuide.palette.primary}
             strokeWidth={STROKE_WIDTH}
-            theta={PI}
+            // theta={PI}
             {...{ r, theta }}
           />
         </Animated.View>
