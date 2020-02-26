@@ -33,14 +33,17 @@ const styles = StyleSheet.create({
 type ListProps = {
     array: Array<Object>;
     navigation: Object;
+    name: string;
 }
 
-export default ({ list, navigation }: ListProps) => {
-    console.log('we mount')
+export default ({ list, navigation, name }: ListProps) => {
+    // console.log('WE MOUNT')
+
     const open = new Value<0 | 1>(0);
     const transition = withTransition(open);
     const state = new Value(State.UNDETERMINED);
     const gestureHandler = onGestureEvent({ state });
+
     const height = bInterpolate(
         transition,
         0,
@@ -55,23 +58,24 @@ export default ({ list, navigation }: ListProps) => {
     useCode(() => cond(eq(state, State.END), set(open, not(open))), [
         open,
         state
-    ])
+    ]);
+
     return (
             <>
-             <TapGestureHandler {...gestureHandler}>
+              <TapGestureHandler {...gestureHandler}>
                 <Animated.View
-                style={[
-                    styles.container,
-                    {
-                        borderBottomLeftRadius: bottomRadius,
-                        borderBottomRightRadius: bottomRadius
-                    }
-                ]}
-                >
-                    <Text style={styles.title}>List of animations</Text>
+                    style={[
+                        styles.container,
+                        {
+                            borderBottomLeftRadius: bottomRadius,
+                            borderBottomRightRadius: bottomRadius
+                        }
+                    ]}
+                    >
+                    <Text style={styles.title}>List of {name}</Text>
                     <Chevron {...{ transition }} />
                 </Animated.View>
-             </TapGestureHandler>
+                </TapGestureHandler>
              <Animated.View style={[styles.items, { height }]}>
                 {list.map((item, key) => (
                     <Item {...{ item, key, navigation }} isLast={key === list.length - 1} />

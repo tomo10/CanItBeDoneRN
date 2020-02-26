@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 
 export interface ListItem {
   title: string;
-  navigate: string;
+  navigate?: string;
 }
 
 interface ListItemProps {
@@ -31,7 +31,7 @@ interface ListItemProps {
 }
 
 export default ({ item, isLast, navigation }: ListItemProps) => {
-debugger
+
 
   const bottomRadius = isLast ? 8 : 0;
   return (

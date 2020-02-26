@@ -12,13 +12,22 @@ const list: ListModel = [
         {title: "Transitions Overlay", navigate: 'TransitionsOverlay'},
         {title: "Timings", navigate: 'Timings'},
         {title: "Pan Gesture", navigate: 'Pan'},
-        {title: "Decay", navigate: 'Decay'}
+        {title: "Decay", navigate: 'Decay'},
+        {title: "SVG", navigate: 'SVG'}
     ]
 
+const dinoList: ListModel = [
+        {title: "T-Rex"},
+        {title: "Velociraptor"},
+        {title: "Btrrachiosaurus"},
+        {title: "Tricerotops"},
+        {title: "Allosaurus"},
+        {title: "Diplodocus"}
+    ]
 
-
+ 
 const HomeScreen = ({ navigation }) => {
-
+    debugger 
     return (
         <>
         <Header/>
@@ -26,7 +35,8 @@ const HomeScreen = ({ navigation }) => {
             scrollEventThrottle={16}
             contentContainerStyle={ { paddingTop: 50 } }
         >
-            <List {...{ list, navigation }} />
+            <List {...{ list, navigation, name: 'Animations' }} />
+            <List {...{ navigation, list: dinoList, name: 'Dinosaurs' } } />
         </Animated.ScrollView>
       </>
     )

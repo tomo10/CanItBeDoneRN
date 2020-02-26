@@ -9,6 +9,7 @@ import TransitionsOverlay from './src/Transitions/TransitionsOverlay';
 import Timings from './src/Timing/Timings';
 import PanGesture from './src/PanGesture/PanGesture';
 import Decay from './src/Decay/Decay';
+import SVG from './src/Svg/Svg';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ export default function App() {
         <Stack.Screen name="Timings" component={Timings} />
         <Stack.Screen name="Pan" component={PanGesture} />
         <Stack.Screen name="Decay" component={Decay} />
+        <Stack.Screen name="SVG" component={SVG} />
       </Stack.Navigator>
     </NavigationContainer>
   );
