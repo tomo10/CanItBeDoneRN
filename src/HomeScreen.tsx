@@ -13,7 +13,8 @@ const list: ListModel = [
         {title: "Timings", navigate: 'Timings'},
         {title: "Pan Gesture", navigate: 'Pan'},
         {title: "Decay", navigate: 'Decay'},
-        {title: "SVG", navigate: 'SVG'}
+        {title: "SVG", navigate: 'SVG'},
+        {title: "Trigonometry", navigate: 'Trigonometry'}
     ]
 
 const dinoList: ListModel = [

@@ -10,6 +10,7 @@ import Timings from './src/Timing/Timings';
 import PanGesture from './src/PanGesture/PanGesture';
 import Decay from './src/Decay/Decay';
 import SVG from './src/Svg/Svg';
+import Trigonometry from './src/Trigonometry/Trigonometry';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ export default function App() {
         <Stack.Screen name="Pan" component={PanGesture} />
         <Stack.Screen name="Decay" component={Decay} />
         <Stack.Screen name="SVG" component={SVG} />
+        <Stack.Screen name="Trigonometry" component={Trigonometry} />
       </Stack.Navigator>
     </NavigationContainer>
   );
