@@ -5,7 +5,7 @@ import { StyleGuide } from "../components";
 import CircularProgress from "./CircularProgress";
 import Cursor from './Cursor'
 
-const {Value} = Animated;
+const {Value, sub, cond, lessThan, add} = Animated
 
 const { PI } = Math;
 const { width } = Dimensions.get("window");
@@ -27,21 +27,24 @@ const styles = StyleSheet.create({
 export default () => {
   const start = new Value(0);
   const end = new Value(0);
-  
+  const theta = sub(
+    cond(lessThan(start, end), end, add(2 * PI, end)), 
+    start); // if start < end. subtract start from end. If not add 2PI to end value
+  const rotate = sub(PI, end);
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <View>
+        <Animated.View style={{...StyleSheet.absoluteFillObject, transform: [{ rotate }]}}>
           <CircularProgress
             bg={StyleGuide.palette.background}
             fg={StyleGuide.palette.primary}
             strokeWidth={STROKE_WIDTH}
             theta={PI}
-            {...{ r }}
+            {...{ r, theta }}
           />
-        </View>
-        <Cursor theta={start} size={STROKE_WIDTH} r={r - STROKE_WIDTH / 2}  />
-        <Cursor theta={end} size={STROKE_WIDTH} r={r - STROKE_WIDTH / 2} />
+        </Animated.View>
+        <Cursor theta={start} strokeWidth={STROKE_WIDTH} r={r - STROKE_WIDTH / 2}  />
+        <Cursor theta={end} strokeWidth={STROKE_WIDTH} r={r - STROKE_WIDTH / 2} />
       </View>
     </View>
   );

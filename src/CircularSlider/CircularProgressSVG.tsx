@@ -4,7 +4,7 @@ import Svg, { Circle } from "react-native-svg";
 
 const { PI } = Math;
 
-interface CircularProgressProps {
+interface CircularProgressSVGProps {
   theta: number;
   r: number;
   bg: string;
@@ -12,7 +12,7 @@ interface CircularProgressProps {
   strokeWidth: number;
 }
 
-export default ({ theta, r, bg, fg, strokeWidth }: CircularProgressProps) => {
+export default ({ theta, r, bg, fg, strokeWidth }: CircularProgressSVGProps) => {
   const radius = r - strokeWidth / 2;
   return (
     <Svg style={StyleSheet.absoluteFill}>
