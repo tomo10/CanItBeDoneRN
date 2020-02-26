@@ -6,7 +6,7 @@ import { Feather as Icon } from "@expo/vector-icons";
 import Animated from 'react-native-reanimated';
 import { bInterpolate } from "react-native-redash";
 
-const { multiply } = Animated;
+const { multiply, sub } = Animated;
 
 export const STROKE_WIDTH = 40;
 const AnimatedCircle = Animated.createAnimatedComponent(Circle)
@@ -33,12 +33,17 @@ export default ({ color, size, progress, icon }: CircularProgressProps) => {
   const cx = size / 2;
   const cy = size / 2;
   const circumferencce = r * 2 * Math.PI;
-  const a = bInterpolate(progress, 0, Math.PI * 2);
+  const a = bInterpolate(sub(1, progress), 0, Math.PI * 2);
   const strokeDashoffset = multiply(a, r);
-
+  const backgroundColor = new Color(color).darken(0.75).string();
   return (
     <View style={styles.container}>
       <Svg style={styles.svg} width={size} height={size}>
+        <Circle 
+          stroke={backgroundColor} 
+          strokeWidth={STROKE_WIDTH}
+          {...{cx, cy, r}}  
+        />
         <AnimatedCircle
           stroke={color}
           fill="none"
@@ -53,6 +58,9 @@ export default ({ color, size, progress, icon }: CircularProgressProps) => {
           }}
         />
       </Svg>
+      <View style={styles.container}>
+          <Icon name={icon} size={STROKE_WIDTH} color='black' style={{top: -r}} />
+      </View>
     </View>
   );
 };
