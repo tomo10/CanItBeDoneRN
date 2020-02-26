@@ -14,7 +14,8 @@ const list: ListModel = [
         {title: "Pan Gesture", navigate: 'Pan'},
         {title: "Decay", navigate: 'Decay'},
         {title: "SVG", navigate: 'SVG'},
-        {title: "Trigonometry", navigate: 'Trigonometry'}
+        {title: "Trigonometry", navigate: 'Trigonometry'},
+        {title: "CircularSlider", navigate: 'CircularSlider'}
     ]
 
 const dinoList: ListModel = [
