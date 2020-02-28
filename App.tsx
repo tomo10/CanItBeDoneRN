@@ -12,6 +12,8 @@ import Decay from './src/Decay/Decay';
 import SVG from './src/Svg/Svg';
 import Trigonometry from './src/Trigonometry/Trigonometry';
 import CircularSlider from './src/CircularSlider/CircularSlider';
+import Tinder from './src/Tinder/Events';
+import Spring from './src/Spring/Spring';
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -25,6 +27,8 @@ export default function App() {
         <Stack.Screen name="Timings" component={Timings} />
         <Stack.Screen name="Pan" component={PanGesture} />
         <Stack.Screen name="Decay" component={Decay} />
+        <Stack.Screen name="Spring" component={Spring} />
+        <Stack.Screen name="Tinder" component={Tinder} />
         <Stack.Screen name="SVG" component={SVG} />
         <Stack.Screen name="Trigonometry" component={Trigonometry} />
         <Stack.Screen name="CircularSlider" component={CircularSlider} />

@@ -13,6 +13,8 @@ const list: ListModel = [
         {title: "Timings", navigate: 'Timings'},
         {title: "Pan Gesture", navigate: 'Pan'},
         {title: "Decay", navigate: 'Decay'},
+        {title: "Spring", navigate: 'Spring'},
+        {title: "Tinder", navigate: 'Tinder'},
         {title: "SVG", navigate: 'SVG'},
         {title: "Trigonometry", navigate: 'Trigonometry'},
         {title: "CircularSlider", navigate: 'CircularSlider'}
@@ -29,7 +31,7 @@ const dinoList: ListModel = [
 
  
 const HomeScreen = ({ navigation }) => {
-    debugger 
+     
     return (
         <>
         <Header/>
