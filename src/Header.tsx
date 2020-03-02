@@ -1,23 +1,36 @@
 import * as React from "react"
-import { View, Text } from "react-native"
+import { View, Text, StyleSheet, Platform, StatusBar } from "react-native"
+import Animated from "react-native-reanimated";
 
-const HEADER_HEIGHT = 60;
+const HEADER_HEIGHT = Platform.OS == 'ios' ? 75 : 70;
 
-export default () => {
+export default (props) => {
+
+    const {scrollY} = props;
+    const diffClampScrollY = Animated.diffClamp(
+        scrollY,
+        0,
+        HEADER_HEIGHT
+    )
+    // this clamps the scrollY value at 0 and HH. Therefore header reappears immediately when you scroll up rather than waiting to get back to HH
+
+    const headerY = Animated.interpolate(diffClampScrollY, {
+        inputRange: [0, HEADER_HEIGHT],
+        outputRange: [0, -HEADER_HEIGHT]
+    })
+
     return (
-        <View
-        style={{
-            height: HEADER_HEIGHT,
-            position: "absolute",
-            top: 0,
-            width: "100%",
-            zIndex: 2,
-            backgroundColor: "pink",
-            justifyContent: "center",
-            alignItems: "center",
+        <Animated.View
+            style={{
+                height: HEADER_HEIGHT,
+                top: 0,
+                left: 0,
+                right: 0,
+                backgroundColor: "pink",
+                zIndex: 10,
+                transform: [{ translateY: headerY }]
           }}
         >
-            
-        </View>
+        </Animated.View>
     )
 }

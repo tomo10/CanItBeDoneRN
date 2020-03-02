@@ -51,6 +51,8 @@ export default () => {
       240
   );
 
+      
+
     // const addY = add(offsetY, translationX);
     // const addX = add(offsetX, translationY);
 
@@ -69,10 +71,11 @@ export default () => {
                 if (index === 0) direction = -1;
                 else if (index === 2) direction = 1;
 
-                // const rotate = multiply(direction, interpolate(transition, {
-                //     inputRange: [0, 1],
-                //     outputRange: [0, 1]
-                //   }))
+                const rotate = multiply(direction, bInterpolate(
+                  transition, 
+                  240, 
+                  90)
+                )
                 
 
                 return (
@@ -82,7 +85,7 @@ export default () => {
                         style={[
                           styles.overlay,
                           {
-                            height
+                            height: rotate
                           }
                       ]}
                       >

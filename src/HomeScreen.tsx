@@ -4,6 +4,8 @@ import Header from './Header'
 import StyleGuide from './components/StyleGuide';
 import Animated from "react-native-reanimated";
 
+const { Value } = Animated;
+
 import List, { List as ListModel } from "./List";
 
 const list: ListModel = [
@@ -32,15 +34,23 @@ const dinoList: ListModel = [
         {title: "Diplodocus"}
     ]
 
+
  
 const HomeScreen = ({ navigation }) => {
+
+    const scrollY = new Value(0);
      
     return (
         <>
-        <Header/>
+        <Header scrollY={scrollY}/>
         <Animated.ScrollView
-            scrollEventThrottle={16}
-            contentContainerStyle={ { paddingTop: 50 } }
+        bounces={false}
+        scrollEventThrottle={16}
+            onScroll={Animated.event([
+                {
+                    nativeEvent: { contentOffset: { y: scrollY } }
+                }
+            ])}
         >
             <List {...{ list, navigation, name: 'Animations' }} />
             <List {...{ navigation, list: dinoList, name: 'Dinosaurs' } } />
