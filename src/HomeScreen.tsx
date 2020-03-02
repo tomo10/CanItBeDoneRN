@@ -44,8 +44,8 @@ const HomeScreen = ({ navigation }) => {
         <>
         <Header scrollY={scrollY}/>
         <Animated.ScrollView
-        bounces={false}
-        scrollEventThrottle={16}
+            bounces={false}
+            scrollEventThrottle={16}
             onScroll={Animated.event([
                 {
                     nativeEvent: { contentOffset: { y: scrollY } }

@@ -3,8 +3,9 @@ import { Dimensions, StyleSheet, View } from "react-native";
 import Animated, { Easing } from "react-native-reanimated";
 import {
   onGestureEvent,
-  withTransition,
-  bInterpolate
+  useTransition,
+  bInterpolate,
+  withTransition
 } from "react-native-redash";
 import { State, TapGestureHandler } from "react-native-gesture-handler";
 
@@ -15,12 +16,14 @@ const { width } = Dimensions.get("window");
 
 
 const withOffset = (
-  value: Animated.Node<number>,
+  value: Animated.Value<number>,
   state: Animated.Value<number>,
   offset: Animated.Value<number>
   ) => {
       return cond(
-          eq(state, State.ACTIVE), value, set(offset, value)
+          eq(state, State.END), 
+          [set(offset, add(offset, value)), offset] // set offset to current value and return offset
+          
       )
   }
 
@@ -33,25 +36,26 @@ export default () => {
     //   <Transition.Change durationMs={500} interpolation="easeInOut"  />
     //   );
     const open = new Value<0 | 1>(0);
+
     const transition = withTransition(open);
+
     const state = new Value(State.UNDETERMINED);
-    // const translationX = new Value(0);
-    // const translationY = new Value(0);
-    // const offsetX = new Value(0);
-    // const offsetY = new Value(0);
+    const translationY = new Value(0);
+
     const gestureHandler = onGestureEvent(
         {
-            state
+            state,
+            translationY
         }
     );
 
-    const height = bInterpolate(
-      transition,
-      0,
-      240
-  );
+  //   const height = bInterpolate(
+  //     transition,
+  //     0,
+  //     240
+  // );
 
-      
+    const transY = bInterpolate(transition, 0, 80);
 
     // const addY = add(offsetY, translationX);
     // const addX = add(offsetX, translationY);
@@ -71,11 +75,7 @@ export default () => {
                 if (index === 0) direction = -1;
                 else if (index === 2) direction = 1;
 
-                const rotate = multiply(direction, bInterpolate(
-                  transition, 
-                  240, 
-                  90)
-                )
+                const newb = multiply(direction, transY);
                 
 
                 return (
@@ -85,9 +85,8 @@ export default () => {
                         style={[
                           styles.overlay,
                           {
-                            height: rotate
-                          }
-                      ]}
+                          transform: [{ translateY: newb }]
+                          }]}
                       >
                         <Tile {...{ tile }} />            
                       </Animated.View>
