@@ -10,6 +10,8 @@ const list: ListModel = [
         {title: "Clock Values and Identities", navigate: 'Clock'},
         {title: "Transitions", navigate: 'Transitions'},
         {title: "Transitions Overlay", navigate: 'TransitionsOverlay'},
+        {title: "Tiles", navigate: 'EventTransition'},
+        {title: "Box", navigate: 'Box'},
         {title: "Timings", navigate: 'Timings'},
         {title: "Pan Gesture", navigate: 'Pan'},
         {title: "Decay", navigate: 'Decay'},

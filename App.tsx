@@ -6,9 +6,11 @@ import ClockValuesAndIdentities from './src/ClockValue/ClockValuesAndIdentities'
 import HomeScreen from './src/HomeScreen';
 import Transitions from './src/Transitions/Transitions';
 import TransitionsOverlay from './src/Transitions/TransitionsOverlay';
+import EventTransition from './src/Transitions/EventTransition';
 import Timings from './src/Timing/Timings';
 import PanGesture from './src/PanGesture/PanGesture';
 import Decay from './src/Decay/Decay';
+import Box from './src/Box/Box';
 import SVG from './src/Svg/Svg';
 import Trigonometry from './src/Trigonometry/Trigonometry';
 import CircularSlider from './src/CircularSlider/CircularSlider';
@@ -24,6 +26,7 @@ export default function App() {
         <Stack.Screen name="Clock" component={ClockValuesAndIdentities} />
         <Stack.Screen name="Transitions" component={Transitions} />
         <Stack.Screen name="TransitionsOverlay" component={TransitionsOverlay} />
+        <Stack.Screen name="EventTransition" component={EventTransition} />
         <Stack.Screen name="Timings" component={Timings} />
         <Stack.Screen name="Pan" component={PanGesture} />
         <Stack.Screen name="Decay" component={Decay} />
@@ -32,6 +35,7 @@ export default function App() {
         <Stack.Screen name="SVG" component={SVG} />
         <Stack.Screen name="Trigonometry" component={Trigonometry} />
         <Stack.Screen name="CircularSlider" component={CircularSlider} />
+        <Stack.Screen name="Box" component={Box} />
       </Stack.Navigator>
     </NavigationContainer>
   );
