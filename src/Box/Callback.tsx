@@ -8,7 +8,7 @@ const { width, height } = Dimensions.get("window");
 const { cond, eq, add, call, set, Value, event, interpolate, Extrapolate, block } = Animated;
 
 const withOffset = (
-    value: Animated.Value<number>,
+    value: Animated.Node<number>,
     state: Animated.Value<number>,
     offset: Animated.Value<number>
     ) => {
@@ -16,6 +16,19 @@ const withOffset = (
             eq(state, State.ACTIVE), value, set(offset, value)
         )
     }
+
+// const onDrop = () => {
+
+// }
+
+// const saveDropZone = (e) => {
+//     const {width, height, x, y} = event.nativeEvent.layout;
+//     const top = y;
+//     const bottom = y + height;
+//     const left = x;
+//     const right = x + width;
+
+// }
 
 const Callback = () => {
 
@@ -32,7 +45,8 @@ const Callback = () => {
 
     const addY = add(offsetY, dragY);
     const addX = add(offsetX, dragX);
-    const transX = cond(eq(state, State.ACTIVE), addX, set(offsetX, addX));
+    // two different ways of doing it below. one with function one without
+    const transX = withOffset(addX, state, offsetX);
     const transY = cond(eq(state, State.ACTIVE), addY, set(offsetY, addY));
 
 

@@ -31,7 +31,7 @@ const [card] = cards;
 
 const withOffset = (value: Animated.Value<number>, state: Animated.Value<State>, offset: Animated.Value<number>) => {
     return cond(
-        eq(state, State.END), // if state of gesture ends.
+        eq(state, State.END), // if state of gesture ends. ie state === state.END.  1 === 1
         [set(offset, add(offset, value)), offset], // set offset to current value and return offset. 
         add(offset, value)) // if not, return sum of the current offset plus translation value 
 };
@@ -40,8 +40,6 @@ export default () => {
     const state = new Value(State.UNDETERMINED);
     const translationX = new Value(0);
     const translationY = new Value(0);
-    // const offsetX = new Value((containerWidth - CARD_WIDTH) / 2);
-    // const offsetY = new Value((containerHeight - CARD_HEIGHT) / 2);
 
     const gestureHandler = onGestureEvent(
         {

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Dimensions, Image, ImageStyle, StyleSheet, View } from "react-native";
+import { Dimensions, Image, ImageStyle, StyleSheet, View, Text } from "react-native";
 import Animated from "react-native-reanimated";
 import StyleGuide from "./StyleGuide";
 
@@ -38,11 +38,14 @@ export const tiles: Tile[] = [
   
   const styles = StyleSheet.create({
     container: {
-      width: TILE_WIDTH,
-      height: TILE_HEIGHT,
-      borderRadius: 18,
-      borderWidth: 1,
-      borderColor: 'black'
+      backgroundColor: '#3D4F5E',
+      padding: 2,
+      marginVertical: 1,
+      width: 80, 
+      height: 80,
+      shadowColor: 'black',
+      shadowOffset: {width: 0, height: 1},
+      shadowOpacity: 1
     },
     flexibleContainer: {
       flex: 1,
@@ -53,6 +56,11 @@ export const tiles: Tile[] = [
       resizeMode: "contain",
       borderWidth: 1,
       borderColor: 'blue'
+    },
+    tileText: {
+      color: '#FBFBFB',
+      fontWeight: '300',
+      fontSize: 12
     }
   });
 
@@ -74,7 +82,13 @@ export interface TileProps {
 
 
 export default ({ tile }: TileProps) => {
-    return <View style={styles.container}  />;
+    return (
+    <View style={styles.container}>
+      <Text style={styles.tileText}>
+        {tile.name}
+      </Text>
+    </View>
+    )
   };
   
 
