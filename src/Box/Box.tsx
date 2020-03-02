@@ -6,7 +6,7 @@ import { onGestureEvent } from "react-native-redash";
 
 const { event, cond, eq, Value } = Animated;
 
-export default () => {
+const Box = () => {
 
     const state = new Value(-1);
     const gestureHandler = onGestureEvent({
@@ -22,6 +22,8 @@ export default () => {
         </View>
     )
 }
+
+export default Box;
 
 
 const styles = StyleSheet.create({

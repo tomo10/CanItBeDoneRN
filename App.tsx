@@ -11,6 +11,7 @@ import Timings from './src/Timing/Timings';
 import PanGesture from './src/PanGesture/PanGesture';
 import Decay from './src/Decay/Decay';
 import Box from './src/Box/Box';
+import Callback from './src/Box/Callback';
 import SVG from './src/Svg/Svg';
 import Trigonometry from './src/Trigonometry/Trigonometry';
 import CircularSlider from './src/CircularSlider/CircularSlider';
@@ -36,6 +37,7 @@ export default function App() {
         <Stack.Screen name="Trigonometry" component={Trigonometry} />
         <Stack.Screen name="CircularSlider" component={CircularSlider} />
         <Stack.Screen name="Box" component={Box} />
+        <Stack.Screen name="Callback" component={Callback} />
       </Stack.Navigator>
     </NavigationContainer>
   );
