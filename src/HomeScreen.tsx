@@ -22,6 +22,7 @@ const list: ListModel = [
         {title: "Tinder", navigate: 'Tinder'},
         {title: "SVG", navigate: 'SVG'},
         {title: "Trigonometry", navigate: 'Trigonometry'},
+        {title: "SimpleSlider", navigate: 'SimpleSlider'},
         {title: "CircularSlider", navigate: 'CircularSlider'}
     ]
 

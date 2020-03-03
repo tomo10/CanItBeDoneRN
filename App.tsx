@@ -15,6 +15,7 @@ import Callback from './src/Box/Callback';
 import SVG from './src/Svg/Svg';
 import Trigonometry from './src/Trigonometry/Trigonometry';
 import CircularSlider from './src/CircularSlider/CircularSlider';
+import SimpleSlider from './src/SimpleSlider/Slider';
 import Tinder from './src/Tinder/Events';
 import Spring from './src/Spring/Spring';
 const Stack = createStackNavigator();
@@ -35,8 +36,9 @@ export default function App() {
         <Stack.Screen name="Tinder" component={Tinder} />
         <Stack.Screen name="SVG" component={SVG} />
         <Stack.Screen name="Trigonometry" component={Trigonometry} />
-        <Stack.Screen name="CircularSlider" component={CircularSlider} />
         <Stack.Screen name="Box" component={Box} />
+        <Stack.Screen name="CircularSlider" component={CircularSlider} />
+        <Stack.Screen name="SimpleSlider" component={SimpleSlider} />
         <Stack.Screen name="Callback" component={Callback} />
       </Stack.Navigator>
     </NavigationContainer>

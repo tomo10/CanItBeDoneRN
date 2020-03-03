@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, TouchableOpacity, ScrollView } from 're
 import Item, { LIST_ITEM_HEIGHT } from "./ListItem";
 import Animated from "react-native-reanimated";
 import Chevron from "./Chevron";
-import { bInterpolate, withTransition, onGestureEvent } from "react-native-redash";
+import { bInterpolate, withTransition, withTimingTransition, onGestureEvent } from "react-native-redash";
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 
 
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 
 
 type ListProps = {
-    array: Array<Object>;
+    list: Array<Object>;
     navigation: Object;
     name: string;
 }
@@ -40,7 +40,10 @@ export default ({ list, navigation, name }: ListProps) => {
     // console.log('WE MOUNT')
 
     const open = new Value<0 | 1>(0);
-    const transition = withTransition(open);
+    const dur = list.length * 75;
+    // const transition = withTransition(open);
+    const transition = withTimingTransition(open, {duration: dur});
+
     const state = new Value(State.UNDETERMINED);
     const gestureHandler = onGestureEvent({ state });
 
