@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
 import Animated from "react-native-reanimated";
 import { MIN_HEADER_HEIGHT, HEADER_DELTA } from "./Model";
+import { Event } from './Model'
 // import { BUTTON_HEIGHT } from "./ShufflePlay";
 
 interface HeaderProps {
@@ -27,7 +28,7 @@ export default ({ event, y }: HeaderProps) => {
 
   return (
     <Animated.View style={[styles.container, { opacity }]}>
-      <Animated.Text style={[styles.title, { opacity: textOpacity }]}>Thomas</Animated.Text>
+      <Animated.Text style={[styles.title, { opacity: textOpacity }]}>{event.title}</Animated.Text>
     </Animated.View>
   );
 };

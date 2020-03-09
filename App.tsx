@@ -52,7 +52,7 @@ export default function App() {
             headerShown: false,
             headerStyle: {
               backgroundColor: 'black',
-              height: 80
+              // height: 80
             },
             headerTintColor: "white",
             // headerTitle: <Header />,

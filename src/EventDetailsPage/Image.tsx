@@ -5,6 +5,7 @@ import {
 } from "react-native";
 import Animated from "react-native-reanimated";
 import { Event, MAX_HEADER_HEIGHT, HEADER_DELTA } from "./Model";
+import { BUTTON_HEIGHT } from "./Reply";
 
 const { interpolate, Extrapolate } = Animated;
 
@@ -40,7 +41,7 @@ export default ({ event: {image}, y}: ImageProps) => {
 const styles = StyleSheet.create({
     container: {
       ...StyleSheet.absoluteFillObject,
-      height: MAX_HEADER_HEIGHT + 48 * 2,
+      height: MAX_HEADER_HEIGHT + BUTTON_HEIGHT * 2,
       backgroundColor: 'white'
     }
   });

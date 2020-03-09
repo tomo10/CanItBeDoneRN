@@ -14,6 +14,10 @@ export interface Guest {
     name: string;
   }
 
+export interface Row {
+    event: Event;
+}
+
 export interface Event {
     title: string;
     startDate: string;

@@ -6,9 +6,10 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import Animated from "react-native-reanimated";
 import { onScroll } from "react-native-redash";
-const BUTTON_HEIGHT = 48;
 import Header from "./Header";
+import Reply, {BUTTON_HEIGHT} from './Reply';
 import { Event, MAX_HEADER_HEIGHT, MIN_HEADER_HEIGHT } from "./Model";
+import Row from "./Row";
 
 interface ContentProps {
     event: Event;
@@ -19,6 +20,18 @@ const { interpolate, Extrapolate } = Animated;
 
 
 export default ({ event, y }: ContentProps) => {
+    // console.log('y:', y)
+    const height = interpolate(y, {
+        inputRange: [-MAX_HEADER_HEIGHT, -BUTTON_HEIGHT / 2],
+        outputRange: [0, MAX_HEADER_HEIGHT + BUTTON_HEIGHT],
+        extrapolate: Extrapolate.CLAMP,
+      });
+
+    const opacity = interpolate(y, {
+        inputRange: [-MAX_HEADER_HEIGHT / 2, 0, MAX_HEADER_HEIGHT / 2],
+        outputRange: [0, 1, 0],
+        extrapolate: Extrapolate.CLAMP
+    })
 
     return (
         <Animated.ScrollView
@@ -28,13 +41,32 @@ export default ({ event, y }: ContentProps) => {
             scrollEventThrottle={1}
             stickyHeaderIndices={[1]}
         >
-            <View style={styles.cover}>
+            <View style={styles.image}>
+                <Animated.View style={[styles.gradient, {height}]}>
+                <LinearGradient
+                    style={StyleSheet.absoluteFill}
+                    start={[0, 0.3]}
+                    end={[0, 1]}
+                    colors={["transparent", "rgba(0, 0, 0, 0.2)", "black"]}
+                />
+                </Animated.View>
                 <View style={styles.artistContainer}>
-                    <Animated.Text style={[styles.artist, { opacity: 1 }]}>{event.title}</Animated.Text>
+                    <Animated.Text style={[styles.artist, { opacity }]}>{event.title}</Animated.Text>
                 </View>
             </View>
             <View style={styles.header}>
                 <Header {...{event, y}} />
+                <Reply />
+            </View>
+            <View style={styles.tracks}>
+                {
+                event.guests.map((guest, key) => (
+                    <Row
+                    // index={key + 1}
+                    {...{ guest, key }}
+                    />
+                ))
+                }
             </View>
         </Animated.ScrollView>
     )
@@ -45,10 +77,10 @@ export default ({ event, y }: ContentProps) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      paddingTop: MIN_HEADER_HEIGHT - BUTTON_HEIGHT / 2,
+      paddingTop: MIN_HEADER_HEIGHT,
     },
-    cover: {
-      height: MAX_HEADER_HEIGHT - BUTTON_HEIGHT,
+    image: {
+      height: MAX_HEADER_HEIGHT,
     },
     gradient: {
       position: "absolute",
@@ -74,5 +106,6 @@ const styles = StyleSheet.create({
     tracks: {
       paddingTop: 32,
       backgroundColor: "black",
+    //   flex: 1
     },
   });
