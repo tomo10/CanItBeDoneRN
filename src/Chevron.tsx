@@ -26,11 +26,12 @@ export default ({ transition }: ChevronProps) => {
     { r: 82, g: 82, b: 81 },
     { r: 228, g: 86, b: 69 }
   ) as Animated.Node<number>;
+
   return (
     <Animated.View
       style={[styles.container, { transform: [{ rotateZ }], backgroundColor }]}
     >
-      <Icon name="chevron-down" color="white" size={24} />
+      <Icon name="chevron-down" color="black" size={24} />
     </Animated.View>
   );
 };

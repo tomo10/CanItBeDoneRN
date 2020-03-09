@@ -37,10 +37,11 @@ type ListProps = {
 }
 
 export default ({ list, navigation, name }: ListProps) => {
-    // console.log('WE MOUNT')
+
 
     const open = new Value<0 | 1>(0);
-    const dur = list.length * 75;
+    // const dur = list.length * 25;
+    const dur = 300;
     // const transition = withTransition(open);
     const transition = withTimingTransition(open, {duration: dur});
 

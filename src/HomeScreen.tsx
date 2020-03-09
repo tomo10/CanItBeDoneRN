@@ -15,6 +15,7 @@ const list: ListModel = [
         {title: "Tiles", navigate: 'EventTransition'},
         {title: "Box", navigate: 'Box'},
         {title: "Callback", navigate: 'Callback'},
+        {title: "CircularSlider", navigate: 'CircularSlider'},
         {title: "Timings", navigate: 'Timings'},
         {title: "Pan Gesture", navigate: 'Pan'},
         {title: "Decay", navigate: 'Decay'},
@@ -22,13 +23,13 @@ const list: ListModel = [
         {title: "Tinder", navigate: 'Tinder'},
         {title: "SVG", navigate: 'SVG'},
         {title: "Trigonometry", navigate: 'Trigonometry'},
+        {title: "TimeGrid", navigate: 'TimeGrid'},
         {title: "SimpleSlider", navigate: 'SimpleSlider'},
-        {title: "CircularSlider", navigate: 'CircularSlider'}
     ]
 
 const dinoList: ListModel = [
-        {title: "T-Rex"},
-        {title: "Velociraptor"},
+        {title: "T-Rex (Spotify)", navigate: 'Spotify'},
+        {title: "Velociraptor (Event)", navigate: 'Event'},
         {title: "Btrrachiosaurus"},
         {title: "Tricerotops"},
         {title: "Allosaurus"},

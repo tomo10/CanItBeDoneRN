@@ -27,7 +27,7 @@ const RULER_HEIGHT = 20;
 
 
 export default () => {
-    console.log('slider mounts')
+  
     const state = new Value(State.UNDETERMINED);
     const translationX = new Value(0);
     const gestureHandler = onGestureEvent({ state, translationX })

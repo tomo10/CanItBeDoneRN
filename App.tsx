@@ -15,15 +15,19 @@ import Callback from './src/Box/Callback';
 import SVG from './src/Svg/Svg';
 import Trigonometry from './src/Trigonometry/Trigonometry';
 import CircularSlider from './src/CircularSlider/CircularSlider';
+import TimeGrid from './src/TimeGrid/TimeGrid';
 import SimpleSlider from './src/SimpleSlider/Slider';
 import Tinder from './src/Tinder/Events';
+import Event from './src/EventDetailsPage/Event';
+import Header from './src/EventDetailsPage/Header';
+// import Spotify from './src/Spotify/Spotify';
 import Spring from './src/Spring/Spring';
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='HomeScreen'>
+      <Stack.Navigator initialRouteName='HomeScreen' headerMode='screen'>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Clock" component={ClockValuesAndIdentities} />
         <Stack.Screen name="Transitions" component={Transitions} />
@@ -38,8 +42,23 @@ export default function App() {
         <Stack.Screen name="Trigonometry" component={Trigonometry} />
         <Stack.Screen name="Box" component={Box} />
         <Stack.Screen name="CircularSlider" component={CircularSlider} />
+        <Stack.Screen name="TimeGrid" component={TimeGrid} />
         <Stack.Screen name="SimpleSlider" component={SimpleSlider} />
         <Stack.Screen name="Callback" component={Callback} />
+        <Stack.Screen 
+          name="Event" 
+          component={Event}
+          options={{
+            headerShown: false,
+            headerStyle: {
+              backgroundColor: 'black',
+              height: 80
+            },
+            headerTintColor: "white",
+            // headerTitle: <Header />,
+            headerBackTitleVisible: false
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

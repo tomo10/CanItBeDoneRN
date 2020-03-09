@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Dimensions, StyleSheet, View, PixelRatio, Text } from "react-native";
 import Animated from 'react-native-reanimated';
 import { StyleGuide } from "../components";
@@ -6,7 +6,9 @@ import CircularProgress from "./CircularProgress";
 import CircularProgressSVG from "./CircularProgressSVG";
 import Cursor from './Cursor'
 
-const {Value, sub, cond, lessThan, add} = Animated
+const {Value, sub, cond, concat, lessThan, add} = Animated
+import { ReText } from "react-native-redash";
+
 
 const { PI } = Math;
 const { width } = Dimensions.get("window");
@@ -26,9 +28,14 @@ const styles = StyleSheet.create({
   }
 });
 
+const renderCoords = (x: Animated.Node<number>, y: Animated.Node<number>) => {
+    const result = concat(x, y);
+    console.log({x, y});
+} 
+
 export default () => {
   console.log('Slider Mounts');
-
+  // const [time, setTime] = useState('')
   const start = new Value(0);
   const end = new Value(0);
   
@@ -37,13 +44,14 @@ export default () => {
     start); // if start < end. subtract start from end. If not add 2PI to end value
   const rotate = sub(2 * PI, start);
   // const rotate = sub(PI, end);
+
+  const label = concat(theta);
+  const rotateLabel = concat(rotate)
   return (
     
     <View style={styles.container}>
-         
-          <Animated.Text />
-          <Animated.Text />  
-      
+      <ReText text={label} />
+      <ReText text={rotateLabel} />
       <View style={styles.content}>
         <Animated.View style={{...StyleSheet.absoluteFillObject, transform: [{ rotate }]}}>
           <CircularProgressSVG
@@ -54,8 +62,18 @@ export default () => {
             {...{ r, theta }}
           />
         </Animated.View>
-        <Cursor theta={start} strokeWidth={STROKE_WIDTH} r={r - STROKE_WIDTH / 2}  />
-        <Cursor theta={end} strokeWidth={STROKE_WIDTH} r={r - STROKE_WIDTH / 2} />
+        <Cursor 
+          theta={start} 
+          strokeWidth={STROKE_WIDTH} 
+          r={r - STROKE_WIDTH / 2} 
+          renderCoords={renderCoords}
+          title={'S'} />
+        <Cursor 
+          theta={end} 
+          strokeWidth={STROKE_WIDTH} 
+          r={r - STROKE_WIDTH / 2} 
+          renderCoords={renderCoords} 
+          title={'E'}/>
       </View>
     </View>
    

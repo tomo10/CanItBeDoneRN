@@ -1,20 +1,22 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import Animated from "react-native-reanimated";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import { canvas2Polar, polar2Canvas } from "./Coordinates";
 import { withOffset, StyleGuide } from "../components";
 
-const { Value, block, event, set, useCode } = Animated;
+const { Value, block, event, set, useCode, cond, eq, call } = Animated;
 
 interface CursorProps {
   r: number;
   theta: Animated.Value<number>;
   strokeWidth: number;
   backgroundColor?: Animated.Node<number>;
+  renderCoords?: JSX.Element;  
+  title: string;
 }
 
-export default ({ r, theta, strokeWidth, backgroundColor }: CursorProps) => {
+export default ({ r, theta, strokeWidth, backgroundColor, renderCoords, title }: CursorProps) => {
   const center = { x: r, y: r };
   const translationX = new Value(0);
   const translationY = new Value(0);
@@ -31,16 +33,22 @@ export default ({ r, theta, strokeWidth, backgroundColor }: CursorProps) => {
       }
     }
   ]);
-  useCode(() => block([set(theta, canvas2Polar({ x, y }, center).theta)]), [
-    center,
-    theta,
-    x,
-    y
-  ]);
+  useCode(() => block([
+      set(theta, canvas2Polar({ x, y }, center).theta),
+      cond(
+        eq(
+          state, State.END), 
+          call([x, y], ([x, y]) => renderCoords( x, y ))
+      )
+      ]), 
+      [state, center, theta, x, y]
+    );
+
   const { x: translateX, y: translateY } = polar2Canvas(
     { theta, radius: r },
     center
   );
+
   return (
     <PanGestureHandler
       onHandlerStateChange={onGestureEvent}
@@ -56,9 +64,12 @@ export default ({ r, theta, strokeWidth, backgroundColor }: CursorProps) => {
           transform: [{ translateX }, { translateY }],
           borderColor: "white",
           borderWidth: 5,
-          
+          justifyContent: 'center',
+          alignItems: 'center'
         }}
-      />
+      >
+        <Text>{title}</Text>
+      </Animated.View>
     </PanGestureHandler>
   );
 };
