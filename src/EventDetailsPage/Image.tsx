@@ -1,11 +1,12 @@
   
 import * as React from "react";
 import {
-  Image, StyleSheet,
+  Image, StyleSheet
 } from "react-native";
 import Animated from "react-native-reanimated";
 import { Event, MAX_HEADER_HEIGHT, HEADER_DELTA } from "./Model";
 import { BUTTON_HEIGHT } from "./Reply";
+
 
 const { interpolate, Extrapolate } = Animated;
 
@@ -15,12 +16,19 @@ interface ImageProps {
 }
 
 export default ({ event: {image}, y}: ImageProps) => {
-// console.log('y:', y)
+console.log('M_H_H:', MAX_HEADER_HEIGHT)
+
+    // const height: any = interpolate(y, {
+    //     inputRange: [0, 300],
+    //     outputRange: [MAX_HEADER_HEIGHT + 100, 300],
+    //     extrapolate: Extrapolate.CLAMP
+    // });
+
     const scale: any = interpolate(y, {
         inputRange: [-MAX_HEADER_HEIGHT, 0],
-        outputRange: [4, 1],
-        extrapolateRight: Extrapolate.CLAMP
-    });
+        outputRange: [2, 1],
+        extrapolateRight: Extrapolate.CLAMP,
+      });
 
     const opacity = interpolate(y, {
         inputRange: [-64, 0, HEADER_DELTA],
@@ -29,7 +37,7 @@ export default ({ event: {image}, y}: ImageProps) => {
     })
 
     return (
-        <Animated.View style={[styles.container, {transform: [{scale}] }]}>
+        <Animated.View style={[styles.container, {transform: [{ scale }] }]}>
             <Animated.View
                 style={{ ...StyleSheet.absoluteFillObject, backgroundColor: "black", opacity }}
             />

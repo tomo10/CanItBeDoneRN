@@ -10,7 +10,7 @@ const event: EventModel = {
     title: "Rave",
     startDate: "Tomorrow",
     notes: "Will be epic",
-    location: "Boom",
+    location: "Boom - Belgium",
     guests: [
         {name: "Thomas"},
         {name: "Tim"}

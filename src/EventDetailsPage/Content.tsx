@@ -1,7 +1,7 @@
   
 import * as React from "react";
 import {
-  StyleSheet, View,
+  StyleSheet, View, Text
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Animated from "react-native-reanimated";
@@ -57,6 +57,9 @@ export default ({ event, y }: ContentProps) => {
             <View style={styles.header}>
                 <Header {...{event, y}} />
                 <Reply />
+            </View>
+            <View style={[styles.tracks, {alignItems: 'center'}]}>
+                <Text style={{color: "#b2b3b4", fontSize: 20}}>{event.location}</Text>
             </View>
             <View style={styles.tracks}>
                 {
