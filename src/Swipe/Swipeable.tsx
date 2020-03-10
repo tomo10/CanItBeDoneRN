@@ -1,13 +1,15 @@
 import * as React from "react";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ARTText} from "react-native";
 import { onGestureEvent } from "react-native-redash";
+
 
 const {
   Clock,
   Value,
   block,
+  useCode,
   cond,
   not,
   clockRunning,
@@ -23,27 +25,47 @@ const {
   abs,
   sub,
   neq,
+  min,
   set,
-  defined,
-  useCode
+  defined
 } = Animated;
+
+interface SwipeableProps {
+  translateX: Animated.Value<number>;
+  translateY: Animated.Value<number>;
+}
 
 interface WithSpringParams {
   value: Animated.Adaptable<number>;
   velocity: Animated.Adaptable<number>;
   state: Animated.Value<State>;
-  snapPoint: number
+  snapPoints: Animated.Adaptable<number>[];
   offset?: Animated.Value<number>;
   config?: SpringConfig;
   onSnap?: (value: readonly number[]) => void;
 }
+
+const snapPoint = (
+  value: Animated.Adaptable<number>,
+  velocity: Animated.Adaptable<number>,
+  points: Animated.Adaptable<number>[]
+) => {
+  const point = add(value, multiply(0.2, velocity));
+  const diffPoint = (p: Animated.Adaptable<number>) => abs(sub(point, p));
+  const deltas = points.map(p => diffPoint(p));
+  const minDelta = min(...deltas);
+  return points.reduce(
+    (acc, p) => cond(eq(diffPoint(p), minDelta), p, acc),
+    new Value()
+  );
+};
 
 const withSpring = (props: WithSpringParams) => {
   const {
     value,
     velocity,
     state,
-    snapPoint,
+    snapPoints,
     offset,
     config: springConfig,
     onSnap
@@ -93,10 +115,9 @@ const withSpring = (props: WithSpringParams) => {
         set(springState.velocity, velocity),
         set(springState.time, 0),
         set(
-          config.toValue, snapPoint),
-
-        //   snapPoint(springState.position, velocity, snapPoint)
-        // ),
+          config.toValue,
+          snapPoint(springState.position, velocity, snapPoints)
+        ),
         startClock(clock)
       ]),
       reSpring(clock, springState, config),
@@ -106,10 +127,7 @@ const withSpring = (props: WithSpringParams) => {
   ]);
 };
 
-interface SwipeableProps {
-  translateX: Animated.Value<number>;
-  translateY: Animated.Value<number>;
-}
+
 
 export default ({ translateX, translateY }: SwipeableProps) => {
   const translationX = new Value(0);
@@ -120,28 +138,29 @@ export default ({ translateX, translateY }: SwipeableProps) => {
   const gestureHandler = onGestureEvent({
     translationX,
     translationY,
-    velocityX,
-    velocityY,
+    velocityX, 
+    velocityY, 
     state
   })
+
   const x = withSpring({
     value: translationX,
     velocity: velocityX,
     state,
-    snapPoints: 0
+    snapPoints: [0]
   });
   const y = withSpring({
     value: translationY,
     velocity: velocityY,
     state,
-    snapPoints: 0
+    snapPoints: [0]
   });
 
-  useCode(block([set(translateX, x), set(translateY, y)]), []);
+  useCode(block([set(translateX, x), set(translateY, y)]), [])
 
   return (
-    <PanGestureHandler {...gestureHandler}>
-      <Animated.View style={StyleSheet.absoluteFill} />
-    </PanGestureHandler>
+      <PanGestureHandler {...gestureHandler}>
+        <Animated.View style={StyleSheet.absoluteFill} />
+      </PanGestureHandler>
   );
 };

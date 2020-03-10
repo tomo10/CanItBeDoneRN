@@ -20,7 +20,7 @@ const list: ListModel = [
         {title: "Pan Gesture", navigate: 'Pan'},
         {title: "Decay", navigate: 'Decay'},
         {title: "Spring", navigate: 'Spring'},
-        {title: "Tinder", navigate: 'Tinder'},
+        {title: "Swipe", navigate: 'Swipe'},
         {title: "SVG", navigate: 'SVG'},
         {title: "Trigonometry", navigate: 'Trigonometry'},
         {title: "TimeGrid", navigate: 'TimeGrid'},

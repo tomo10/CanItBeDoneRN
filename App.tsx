@@ -17,7 +17,7 @@ import Trigonometry from './src/Trigonometry/Trigonometry';
 import CircularSlider from './src/CircularSlider/CircularSlider';
 import TimeGrid from './src/TimeGrid/TimeGrid';
 import SimpleSlider from './src/SimpleSlider/Slider';
-import Tinder from './src/Tinder/Events';
+import Swipe from './src/Swipe';
 import Event from './src/EventDetailsPage/Event';
 import Header from './src/EventDetailsPage/Header';
 // import Spotify from './src/Spotify/Spotify';
@@ -27,7 +27,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='HomeScreen' headerMode='screen'>
+      <Stack.Navigator initialRouteName='Swipe' headerMode='screen'>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Clock" component={ClockValuesAndIdentities} />
         <Stack.Screen name="Transitions" component={Transitions} />
@@ -37,7 +37,7 @@ export default function App() {
         <Stack.Screen name="Pan" component={PanGesture} />
         <Stack.Screen name="Decay" component={Decay} />
         <Stack.Screen name="Spring" component={Spring} />
-        <Stack.Screen name="Tinder" component={Tinder} />
+        <Stack.Screen name="Swipe" component={Swipe} />
         <Stack.Screen name="SVG" component={SVG} />
         <Stack.Screen name="Trigonometry" component={Trigonometry} />
         <Stack.Screen name="Box" component={Box} />

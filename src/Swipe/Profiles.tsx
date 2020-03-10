@@ -9,13 +9,15 @@ import Card, { Profile } from "./Profile";
 import Swipeable from "./Swipeable";
 import { timing, StyleGuide } from "../components";
 
+
+const { Value } = Animated;
+
 const { width, height } = Dimensions.get("window");
 const deltaX = width / 2;
 const α = Math.PI / 12;
 const A = Math.round(width * Math.cos(α) + height * Math.sin(α));
 const snapPoints = [-A, 0, A];
 
-const { Value } = Animated;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -72,7 +74,7 @@ export default ({ profiles }: ProfilesProps) => {
         <Animated.View
           style={{
             ...StyleSheet.absoluteFillObject,
-            transform: [{translateX}, {translateY}]
+            transform: [{ translateX }, { translateY }]
           }}
         >
           <Card {...{ profile }} />
