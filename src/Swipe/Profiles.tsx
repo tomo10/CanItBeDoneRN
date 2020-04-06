@@ -79,7 +79,7 @@ export default ({ profiles }: ProfilesProps) => {
         >
           <Card {...{ profile }} />
         </Animated.View>
-        <Swipeable {...{translateX, translateY}} />
+        <Swipeable {...{translateX, translateY, snapPoints}} />
       </View>
       <View style={styles.footer}>
         <RectButton

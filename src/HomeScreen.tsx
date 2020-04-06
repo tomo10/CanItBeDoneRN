@@ -28,7 +28,7 @@ const list: ListModel = [
     ]
 
 const dinoList: ListModel = [
-        {title: "T-Rex (Spotify)", navigate: 'Spotify'},
+        {title: "T-Rex (Calendar)", navigate: 'Calendar'},
         {title: "Velociraptor (Event)", navigate: 'Event'},
         {title: "Btrrachiosaurus"},
         {title: "Tricerotops"},

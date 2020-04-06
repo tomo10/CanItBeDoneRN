@@ -18,6 +18,7 @@ interface CursorProps {
 
 export default ({ r, theta, strokeWidth, backgroundColor, renderCoords, title }: CursorProps) => {
   const center = { x: r, y: r };
+  console.log('center', center)
   const translationX = new Value(0);
   const translationY = new Value(0);
   const state = new Value(State.UNDETERMINED);

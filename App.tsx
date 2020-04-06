@@ -16,6 +16,7 @@ import SVG from './src/Svg/Svg';
 import Trigonometry from './src/Trigonometry/Trigonometry';
 import CircularSlider from './src/CircularSlider/CircularSlider';
 import TimeGrid from './src/TimeGrid/TimeGrid';
+import Calendar from './src/Calendar/Calendar';
 import SimpleSlider from './src/SimpleSlider/Slider';
 import Swipe from './src/Swipe';
 import Event from './src/EventDetailsPage/Event';
@@ -27,7 +28,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Swipe' headerMode='screen'>
+      <Stack.Navigator initialRouteName='HomeScreen' headerMode='screen'>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Clock" component={ClockValuesAndIdentities} />
         <Stack.Screen name="Transitions" component={Transitions} />
@@ -43,6 +44,7 @@ export default function App() {
         <Stack.Screen name="Box" component={Box} />
         <Stack.Screen name="CircularSlider" component={CircularSlider} />
         <Stack.Screen name="TimeGrid" component={TimeGrid} />
+        <Stack.Screen name="Calendar" component={Calendar} />
         <Stack.Screen name="SimpleSlider" component={SimpleSlider} />
         <Stack.Screen name="Callback" component={Callback} />
         <Stack.Screen 

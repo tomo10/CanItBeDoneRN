@@ -50,7 +50,10 @@ export default () => {
   return (
     
     <View style={styles.container}>
-      <ReText text={label} />
+      <View style={{flexDirection: 'row'}}>
+        <Text>Theta:   </Text>
+        <ReText text={label} />
+      </View>
       <ReText text={rotateLabel} />
       <View style={styles.content}>
         <Animated.View style={{...StyleSheet.absoluteFillObject, transform: [{ rotate }]}}>

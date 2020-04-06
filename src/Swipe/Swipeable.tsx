@@ -30,10 +30,7 @@ const {
   defined
 } = Animated;
 
-interface SwipeableProps {
-  translateX: Animated.Value<number>;
-  translateY: Animated.Value<number>;
-}
+
 
 interface WithSpringParams {
   value: Animated.Adaptable<number>;
@@ -127,6 +124,12 @@ const withSpring = (props: WithSpringParams) => {
   ]);
 };
 
+
+interface SwipeableProps {
+  translateX: Animated.Value<number>;
+  translateY: Animated.Value<number>;
+  snapPoints: number[];
+}
 
 
 export default ({ translateX, translateY }: SwipeableProps) => {
