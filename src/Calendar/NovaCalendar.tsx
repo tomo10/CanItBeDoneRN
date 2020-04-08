@@ -1,23 +1,32 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Text, View, FlatList, StyleSheet } from 'react-native';
-import { MONTH_HEIGHT, monthIndex, months } from './Model';
+import { MONTH_HEIGHT, months } from './Model';
 import MonthToDisplay from './MonthToDisplay';
+let currentDate = new Date();
 
 const listItem = ( item: number, index: number ) => {    
-    console.log(item)
+    // console.log(mi)
     return (
         <MonthToDisplay 
-            monthIndex={index}
+            monthIndex={item}
         />
     )
 };
 
-export default () => {
 
+export default () => {
+    const [MI, setMI] = useState(currentDate.getMonth() );
+    
+    const chooseDifferentMonth = ( index: number ) => {
+        if (index !== MI) setMI(index);
+    };
+
+    console.log('mi:', MI)
     return (
-        <View style={{height: MONTH_HEIGHT}}>
+        <View style={styles.container}>
             <FlatList 
-                data={[1,2,3,4,5,6,7,8,9,10,11,12]}
+                data={[ MI - 1, MI, MI + 1 ]}
+                extraData={MI}
                 renderItem={({item, index}) => listItem(item, index)}
                 decelerationRate={'fast'}
                 snapToAlignment={'start'}
@@ -25,10 +34,12 @@ export default () => {
                 getItemLayout={(data, index) => (
                     {length: MONTH_HEIGHT, offset: MONTH_HEIGHT * index, index}
                 )}
-                initialScrollIndex={new Date().getMonth()}
+                initialScrollIndex={1}
                 initialNumToRender={1}
                 windowSize={3}
                 pagingEnabled={true}
+                onEndReached={(info: {distanceFromEnd: number}) => chooseDifferentMonth(MI + 1)}
+                onEndReachedThreshold={0.5}
             />
         </View>
     )
@@ -38,7 +49,6 @@ const styles = StyleSheet.create({
     container: {
         borderColor: 'black',
         borderWidth: 2,
-        height: MONTH_HEIGHT,
-        alignItems: 'center'
+        height: MONTH_HEIGHT
     }
 })

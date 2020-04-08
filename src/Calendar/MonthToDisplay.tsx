@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { MONTH_HEIGHT, months } from './Model';
+import DaysInMonth from './DaysInMonth';
 
 
 export interface MonthProps {
@@ -9,19 +10,21 @@ export interface MonthProps {
 
 export default ({monthIndex}: MonthProps) => {
 
+useEffect(() => (
+    console.log('Month To Display useEffect')
+))
+
     return (
-        <View style={styles.row}>
+        <View style={styles.container}>
             <Text style={{fontSize: 20}}>{months[monthIndex]}</Text>
+            <DaysInMonth />
         </View>
     )
 }
 
 
 const styles = StyleSheet.create({
-    row: {
-        height: MONTH_HEIGHT,
-        borderColor: 'black',
-        borderWidth: 2,
-        alignItems: 'center'
+    container: {
+        height: MONTH_HEIGHT
     }
 })
