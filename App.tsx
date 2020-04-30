@@ -12,6 +12,7 @@ import PanGesture from './src/PanGesture/PanGesture';
 import Decay from './src/Decay/Decay';
 import Box from './src/Box/Box';
 import Callback from './src/Box/Callback';
+import CalX from './src/Box/CalX';
 import SVG from './src/Svg/Svg';
 import Trigonometry from './src/Trigonometry/Trigonometry';
 import CircularSlider from './src/CircularSlider/CircularSlider';
@@ -42,6 +43,7 @@ export default function App() {
         <Stack.Screen name="SVG" component={SVG} />
         <Stack.Screen name="Trigonometry" component={Trigonometry} />
         <Stack.Screen name="Box" component={Box} />
+        <Stack.Screen name="CalX" component={CalX} />
         <Stack.Screen name="CircularSlider" component={CircularSlider} />
         <Stack.Screen name="TimeGrid" component={TimeGrid} />
         <Stack.Screen name="Calendar" component={Calendar} />

@@ -14,6 +14,7 @@ const list: ListModel = [
         {title: "Transitions Overlay", navigate: 'TransitionsOverlay'},
         {title: "Tiles", navigate: 'EventTransition'},
         {title: "Box", navigate: 'Box'},
+        {title: "CalX", navigate: 'CalX'},
         {title: "Callback", navigate: 'Callback'},
         {title: "CircularSlider", navigate: 'CircularSlider'},
         {title: "Timings", navigate: 'Timings'},

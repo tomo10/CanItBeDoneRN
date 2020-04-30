@@ -1,12 +1,24 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import DayHolder from './DayHolder';
 
 
 export default () => {
 
     return (
-        <View>
-            <Text>Im a row</Text>
+        <View style={{flexDirection: 'row'}}>
+            <DayHolder />
+            <DayHolder />
+            <DayHolder />
+            <DayHolder />
+            <DayHolder />
+            <DayHolder />
+            <DayHolder />
         </View>
     )
 }
+
+
+const styles = StyleSheet.create({
+
+})

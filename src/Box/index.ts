@@ -8,4 +8,5 @@
 // export * from "./AnimationHelpers";
 
 export { default as Box } from './Box';
+export { default as CalX } from './CalX';
 // export {default as Box} from './Box';

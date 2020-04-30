@@ -7,7 +7,6 @@ import Constants from "expo-constants";
 import { onGestureEvent } from "react-native-redash";
 import { Card, StyleGuide, cards } from "../components";
 import { CARD_HEIGHT, CARD_WIDTH } from "../components/Card";
-import ClockValuesAndIdentities from "../ClockValue/ClockValuesAndIdentities";
 
 const { Value, diffClamp, cond, set, eq, add, decay: reDecay, clockRunning, and, not, startClock, stopClock, block, Clock, neq, } = Animated;
 const { width, height } = Dimensions.get("window");
@@ -75,7 +74,7 @@ export default () => {
   const translationY = new Value(0);
   const velocityX = new Value(0);
   const velocityY = new Value(0);
-  const gestureHandler = onGestureEvent({
+  const gestureHandler =  ({
     state,
     translationX,
     translationY,
